@@ -9,21 +9,21 @@ public class PC {
     }
 
     // The relation between variant and ENUM
-    private Variants playerChoice() {
+    private Variant playerChoice() {
         switch (point) {
             case '1':
-                return Variants.ROCK;
+                return Variant.ROCK;
             case '2':
-                return Variants.SHEARS;
+                return Variant.SHEARS;
             case '3':
-                return Variants.PAPER;
+                return Variant.PAPER;
             default:
                 System.out.println("Error");
                 return null;
         }
     }
 
-    public Variants getPlayerChoice() {
+    public Variant getPlayerChoice() {
         return playerChoice();
     }
 }

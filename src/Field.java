@@ -1,8 +1,26 @@
-public class Field implements Menu{
-    private char choice1;
-    private char choice2;
+public class Field {
 
-    // Create the menu and choice variant.
+    public Variant[] updateField(Variant setFigure) {
+        Variant[] playerChoice = new Variant [2];
+        int counter = -1;
+        if (counter == playerChoice.length-1) {
+           Variant temp[] = new Variant[playerChoice.length + 2];
+           for (int i=0; i<playerChoice.length; i++) temp[i] = playerChoice[i];
+           playerChoice = temp;
+           playerChoice[++counter] = setFigure;
+           return playerChoice;
+        }
+        else {
+            playerChoice[++counter] = setFigure;
+            return playerChoice;
+        }
+    }
+
+
+
+
+
+    /*// Create the menu and choice variant.
     public void menu() throws java.io.IOException {
         do {
             System.out.println("Game Rock-Shears-Paper\n");
@@ -10,25 +28,25 @@ public class Field implements Menu{
             System.out.println("2. SHEARS;");
             System.out.println("3. PAPER;");
             System.out.println("Player1 enter needed point:");
-            choice1 = (char) System.in.read();
+            firstPlayerChoice = (char) System.in.read();
             System.out.println("Player2 enter needed point:");
-            choice2 = (char) System.in.read();
-        } while (choice1 < '1' || choice1 > '3');
+            secondPlayerChoice = (char) System.in.read();
+        } while (firstPlayerChoice < '1' || firstPlayerChoice > '3');
 
-        if (choice1 != '0' && choice2 == '0') {
-            GameLogic game = new GameLogic();
-            game.performing(choice1, choice2);
+        if (firstPlayerChoice != '0' && secondPlayerChoice == '0') {
+            StandardGameLogic game = new StandardGameLogic();
+            game.performing(firstPlayerChoice, secondPlayerChoice);
         } else {
-            GameLogic game = new GameLogic();
-            game.performing(choice1);
+            StandardGameLogic game = new StandardGameLogic();
+            game.performing(firstPlayerChoice);
         }
     }
 
     public char getChoice1() {
-        return choice1;
+        return firstPlayerChoice;
     }
 
     public char getChoice2() {
-        return choice2;
-    }
+        return secondPlayerChoice;
+    }*/
 }

@@ -1,3 +1,3 @@
 public interface Menu {
-    void menu() throws java.io.IOException;
+    void showMenu() throws java.io.IOException;
 }
