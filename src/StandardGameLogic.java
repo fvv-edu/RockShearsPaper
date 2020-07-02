@@ -1,11 +1,11 @@
 import java.io.IOException;
 
-public class StandardGameLogic implements GameLogic, Menu{
+public class StandardGameLogic implements GameLogic, Menu {
     private char point;
-    Variant[] playerChoice;
+    private Variant[] playerChoice;
 
     // Create menu
-    public void showMenu() throws java.io.IOException {
+    public void showMenu() {
             System.out.println("Game Rock-Shears-Paper\n");
             System.out.println("1. ROCK;");
             System.out.println("2. SHEARS;");
@@ -15,42 +15,51 @@ public class StandardGameLogic implements GameLogic, Menu{
     // Enter number-choice
     public char getInput() throws java.io.IOException {
         System.out.println("Enter needed point:");
-        return (char)System.in.read();
+        point = (char)System.in.read();
+        return point;
     }
 
     // Check choice
-    public void validateInput() throws IOException {
-        //while (getInput() < 1 || getInput() > 3) {
+    private char validateInput() throws IOException {
+        while (point < '1' || point > '3') {
             System.out.println("\nError!");
             System.out.println("Game Rock-Shears-Paper");
             System.out.println("1. ROCK;");
             System.out.println("2. SHEARS;");
             System.out.println("3. PAPER;");
-            //getInput();
-        //}
+            point = getInput();
+        }
+        return point;
     }
 
-    public char generatePCVariant() {
+    // Generate random number for Computer choosing
+    private char generatePCVariant() {
         char randomVar[] = {'1', '2', '3'};
         return randomVar[(int) (Math.random() * 3)];
+
     }
 
     // The relation between getInput()/generatePCVariant() and Variant
-    public Variant setFigure(char point) {
+    private Variant setFigure(char point) {
         this.point = point;
         switch (point) {
             case '1':
+                System.out.println(Variant.ROCK);
                 return Variant.ROCK;
             case '2':
+                System.out.println(Variant.SHEARS);
                 return Variant.SHEARS;
             case '3':
+                System.out.println(Variant.PAPER);
                 return Variant.PAPER;
             default:
+                System.out.println(Variant.OTHER);
                 return Variant.OTHER;
         }
     }
 
-    public String checkWinner(Variant[] playerChoice) {
+    // Logic to choosing a winner
+    private String checkWinner(Variant[] playerChoice) {
         this.playerChoice = playerChoice;
         if (playerChoice[0].equals(playerChoice[1])) {
            return "Draw!";
@@ -63,15 +72,15 @@ public class StandardGameLogic implements GameLogic, Menu{
         }
     }
 
-    public void output(Variant[] playerChoice) {
-        this.playerChoice = playerChoice;
+    // Output text who is winner and loser
+    public void output() {
         if (checkWinner(playerChoice).equals("Draw!")) {
             System.out.println("Player chooses " + playerChoice[0]);
             System.out.println("Computer chooses " + playerChoice[1]);
             System.out.println(checkWinner(playerChoice));
         } else if (checkWinner(playerChoice).equals("The Player wins!")) {
             System.out.println("Player chooses " + playerChoice[0]);
-            System.out.println("Computer chooses" + playerChoice[1]);
+            System.out.println("Computer chooses " + playerChoice[1]);
             System.out.println(checkWinner(playerChoice));
         } else {
             System.out.println("Player chooses " + playerChoice[0]);
@@ -80,27 +89,26 @@ public class StandardGameLogic implements GameLogic, Menu{
         }
     }
 
-    public Variant getSetFigure() throws IOException {
-        return setFigure(point);
-    }
-
-    public void setSetFigure(char point) {
-        this.point = point;
+    public char getValidateInput() throws IOException {
+        return validateInput();
     }
 
     public char getGeneratePCVariant() {
         return generatePCVariant();
     }
 
-    public void setOutput(Variant[] playerChoice) {
+    public Variant getSetFigure(char point) {
+        this.point = point;
+        return setFigure(point);
+    }
+
+    public String getCheckWinner(Variant[] playerChoice) {
         this.playerChoice = playerChoice;
+        return checkWinner(playerChoice);
     }
 
 
-
-
-
-    /*//It is Player vs Computer game logic
+    /*It is Player vs Computer game logic
     public void performing (char point) {
         Player p1 = new Player();
         PC p2 = new PC();

@@ -1,8 +1,13 @@
 public class Field {
+    Variant[] playerChoice;
+    int counter;
+
+    Field() {
+        playerChoice = new Variant [2];
+        counter = -1;
+    }
 
     public Variant[] updateField(Variant setFigure) {
-        Variant[] playerChoice = new Variant [2];
-        int counter = -1;
         if (counter == playerChoice.length-1) {
            Variant temp[] = new Variant[playerChoice.length + 2];
            for (int i=0; i<playerChoice.length; i++) temp[i] = playerChoice[i];
